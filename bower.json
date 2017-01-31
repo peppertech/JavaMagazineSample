@@ -1,0 +1,8 @@
+{
+  "name": "JavaMagazineSample",
+  "version": "1.0.0",
+  "dependencies": 
+  {
+    "oraclejet": "~2.3.0"
+  }
+}
