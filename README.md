@@ -5,7 +5,7 @@
 * Bower
 
 ## Installation
-After cloning the repository, change to the root of the application and type:
+After cloning the repository, change to the root of the application and type
 
 ```
 npm install
@@ -13,7 +13,7 @@ bower install
 grunt bowercopy
 ```
 
-To build and run the application in a browser type:
+To build and run the application in a browser type
 
 ```
 grunt build
