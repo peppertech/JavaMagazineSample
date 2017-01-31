@@ -11,3 +11,4 @@ hybrid/www/*
 hybrid/plugins/*
 !hybrid/plugins/fetch.json
 
+/nbproject/*

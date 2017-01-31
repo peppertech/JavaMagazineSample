@@ -4,7 +4,7 @@
 -->
 <div class="oj-hybrid-padding">
     <h3>Alternative Fuels</h3>
-    <div class="oj-flex">
+    <div class="oj-flex oj-flex-items-pad">
         <div class="oj-flex-item">
             <label id="groupLabel">Enter City and State</label>
             <div role="group" aria-labelledby="groupLabel" class="oj-form-control-group">
@@ -20,10 +20,29 @@
                 <button data-bind="ojComponent: {component: 'ojButton',label:'Search'},click:getData"></button>
             </div>
         </div>
+                <div class="oj-flex-item">
+            <label id="mainlabelid">Chart Type</label>
+            <!-- You need to set the aria-labelledby attribute
+                 to make this accessible.
+                 role="radiogroup" is set for you by ojRadioset. -->
+            <div id="radiosetBasicDemoId" aria-labelledby="mainlabelid"
+                 data-bind="ojComponent: {
+                    component: 'ojRadioset', 
+                    value: chartType}" >
+                <span class="oj-choice-row">
+                    <input id="pieopt" type="radio" name="chartTypeRadio" value="pie">
+                    <label for="pieopt">Pie</label>
+                </span>
+                <span class="oj-choice-row">
+                    <input id="baropt" type="radio" name="chartTypeRadio" value="bar">
+                    <label for="baropt">Bar</label>
+                </span>
+            </div>
+        </div><br/><br/>
         <div class="oj-flex-item">
             <div id="pieChart" data-bind="ojComponent: {
 			component: 'ojChart', 
-			type: 'pie', 
+			type: chartType, 
 			series: pieSeriesValue, 
                         groups: groupsValue,
 			animationOnDisplay: 'auto',
@@ -34,5 +53,6 @@
                  style="max-width:500px;width:100%;height:350px;">
             </div>
         </div>
+
     </div>
 </div>

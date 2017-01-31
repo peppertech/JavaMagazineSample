@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcombobox', 'ojs/ojchart', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcombobox', 'ojs/ojchart', 'ojs/ojbutton', 'ojs/ojradioset'],
         function (oj, ko, $) {
 
             function DashboardViewModel() {
@@ -37,6 +37,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                  */
                 self.handleActivated = function (info) {
                     self.cityVal = ko.observable('San Jose');
+                    self.chartType = ko.observable('pie');
                     self.selectVal = ko.observableArray(['CA']);
                     self.pieSeriesValue = ko.observableArray([]);
                     self.groupsValue = ko.observableArray(['Fuel Types'])
@@ -123,6 +124,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                                 return fuelTypes[i].name;
                         }
                     }
+                    
+                    self.getSeriesValue = Promise.resolve(self.getData);
+                    
                 };
 
                 /**
