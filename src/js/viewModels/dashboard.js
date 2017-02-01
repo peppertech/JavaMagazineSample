@@ -40,7 +40,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                     self.chartType = ko.observable('pie');
                     self.selectVal = ko.observableArray(['CA']);
                     self.pieSeriesValue = ko.observableArray([]);
-                    self.groupsValue = ko.observableArray(['Fuel Types'])
+                    self.groupsValue = ko.observableArray(['Fuel Types']);
+                    self.seriesValue = ko.observable();
 
                     self.States = [
                         {label: 'ALABAMA', value: 'AL'},
@@ -103,30 +104,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                         {label: 'WISCONSIN', value: 'WI'},
                         {label: 'WYOMING', value: 'WY'}
                     ];
-
+                    
                     self.getData = function () {
-                        var url = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?api_key=IfzSwc4snuZkl1rk8nRb8NJGt1YTH2ndbZZLWlTf&location=" + self.cityVal() + "+" + self.selectVal()
-                        $.getJSON(url).then(function (data) {
-                            var fuels = data.station_counts.fuels;
-                            var pieSeries = [];
-                            for (var prop in fuels) {
-                                if (fuels[prop].total > 0) {
-                                    pieSeries.push({name: getFuelName(prop), items: [fuels[prop].total]})
+                        self.seriesValue(new Promise(function (resolve, reject) {
+                            var url = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?api_key=IfzSwc4snuZkl1rk8nRb8NJGt1YTH2ndbZZLWlTf&location=" + self.cityVal() + "+" + self.selectVal()
+                            $.getJSON(url).then(function (data) {
+                                var fuels = data.station_counts.fuels;
+                                var seriesData = [];
+                                for (var prop in fuels) {
+                                    if (fuels[prop].total > 0) {
+                                        seriesData.push({name: getFuelName(prop), items: [fuels[prop].total]})
+                                    }
                                 }
-                            }
-                            self.pieSeriesValue(pieSeries);
-                        });
+                                resolve(seriesData);
+                            });
+                        }))
                     };
-
+                    
                     var getFuelName = function (prop) {
                         for (var i in fuelTypes) {
                             if (fuelTypes[i].abbr === prop)
                                 return fuelTypes[i].name;
                         }
                     }
-                    
-                    self.getSeriesValue = Promise.resolve(self.getData);
-                    
                 };
 
                 /**
