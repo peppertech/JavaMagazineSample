@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
             function DashboardViewModel() {
                 var self = this;
 
+                // provide long names for each abbreviation provided by the REST service
                 var fuelTypes = [{name: 'Bio-Diesel', abbr: 'BD'},
                     {name: 'Compressed Natural Gas', abbr: 'CNG'},
                     {name: 'Electric Charging', abbr: 'ELEC'},
@@ -43,6 +44,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                     self.groupsValue = ko.observableArray(['Fuel Types']);
                     self.seriesValue = ko.observable();
 
+                    // provide list of states for use in the select pulldown
                     self.States = [
                         {label: 'ALABAMA', value: 'AL'},
                         {label: 'ALASKA', value: 'AK'},
@@ -106,6 +108,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                     ];
                     
                     self.getData = function () {
+                        
+                        // using a Promise to allow the chart to render only once the data is available.
                         self.seriesValue(new Promise(function (resolve, reject) {
                             var url = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?api_key=IfzSwc4snuZkl1rk8nRb8NJGt1YTH2ndbZZLWlTf&location=" + self.cityVal() + "+" + self.selectVal()
                             $.getJSON(url).then(function (data) {
@@ -121,6 +125,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                         }))
                     };
                     
+                    // get the long name of the fuel type from the abbreviate returned by the REST service
                     var getFuelName = function (prop) {
                         for (var i in fuelTypes) {
                             if (fuelTypes[i].abbr === prop)
@@ -139,7 +144,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                  * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
                  */
                 self.handleAttached = function (info) {
-                    // Implement if needed
+                    // once the DOM is available, call the getData to load defaults
                     self.getData();
                 };
 
