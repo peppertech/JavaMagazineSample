@@ -111,7 +111,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
                         
                         // using a Promise to allow the chart to render only once the data is available.
                         self.seriesValue(new Promise(function (resolve, reject) {
-                            var url = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?api_key=IfzSwc4snuZkl1rk8nRb8NJGt1YTH2ndbZZLWlTf&location=" + self.cityVal() + "+" + self.selectVal()
+                            var url = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?location=" + self.cityVal() + "+" + self.selectVal()+"&api_key=<your api key goes here>"
                             $.getJSON(url).then(function (data) {
                                 var fuels = data.station_counts.fuels;
                                 var seriesData = [];
