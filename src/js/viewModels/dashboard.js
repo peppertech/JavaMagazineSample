@@ -175,9 +175,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojselectcomb
             }
 
             /*
-             * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
-             * each time the view is displayed.  Return an instance of the ViewModel if
-             * only one instance of the ViewModel is needed.
+             * You can return a constructor for the ViewModel so that the ViewModel is constrcuted
+             * each time the view is displayed, or return an instance of the ViewModel if
+             * only one instance of the ViewModel is needed. The example below is returning an instance.
              */
             return new DashboardViewModel();
         }
