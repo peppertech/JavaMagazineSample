@@ -6,6 +6,9 @@ show a list of the different types of alternative fuel stations located in the c
 The resulting data is shown in a Pie chart by default with an option to change to a bar chart display. 
 You can click on any item in the legend of the chart to hide or show that item.
 
+![final app screenshot one](http://dessertfirstproductions.com/images/final-1.png "final app screenshot one")
+![final app screenshot two](http://dessertfirstproductions.com/images/final-2.png "final app screenshot two")
+
 ### Prerequisites
 * Node.js (for npm)
 * Bower
